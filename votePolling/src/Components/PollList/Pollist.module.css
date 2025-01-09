@@ -1,0 +1,44 @@
+.list{
+    width: 80vw;
+    margin: 0 auto;
+}
+h4{
+    color: springgreen;
+    font-size: 24px;
+    padding-bottom: 10px;
+}
+a,.link{
+    text-decoration: none;
+    width: 122px;
+    padding: 10px;
+    text-align: center;
+    background-color: rgb(102, 212, 102);
+    color: white;
+    border-radius: 10px;
+}
+.link{
+    background-color: rgb(226, 58, 58);;
+}
+    
+button{
+    font-size: 20px;
+}
+.NoPoll{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.lists{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+p{
+    font-size: 25px;
+}
+@media (max-width:550px) {
+
+}
+
+

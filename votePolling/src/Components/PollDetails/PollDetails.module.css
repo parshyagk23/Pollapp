@@ -1,0 +1,29 @@
+.Details {
+    width: 80vw;
+    margin: 0 auto
+}
+
+input {
+    width: 15px;
+}
+
+.btn {
+    width: 120px;
+    height: 20px;
+    padding: 10px;
+    background-color: rgb(102, 212, 102);
+    color: white;
+    border-radius: 45px;
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.pollData {
+    width: 80vw;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+}

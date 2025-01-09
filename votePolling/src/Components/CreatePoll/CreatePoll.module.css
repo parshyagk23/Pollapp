@@ -1,0 +1,72 @@
+.poll{
+    width: 80vw;
+    margin: 0 auto;
+}
+h1{
+    font-size: 45px;
+    text-align: center;
+    margin-top: 110px;
+}
+.PollForm{
+    width: 80vw;
+    margin: 0 auto;
+}
+
+.Form {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.PollForm div label{
+    width: 150px;
+    font-size: 20px;
+    text-align: left;
+    font-weight: bold;
+    padding-bottom:30px ;
+}
+.PollForm div input,.PollForm div textarea{
+    width: 500px;
+    height: 30px;
+    outline: none;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding-left: 20px;
+    font-size: 15px;
+    
+   
+}
+textarea{
+    resize: none;
+    
+}
+.btn{
+    width: 60vw;
+    background-color: rgb(102, 212, 102);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 50px;
+    font-size: 20px;
+    margin: 10px auto;
+    text-align: center;
+    cursor: pointer;
+}
+button{
+    all: unset;
+    font-size: 20px;
+}
+
+@media (max-width: 500px) {
+    h1{
+        font-size: 30px;
+    }
+    .PollForm div input,.PollForm div textarea{
+        width: 200px;
+    }
+    .PollForm div label{
+        width: 100px;
+    }
+    
+}

@@ -1,0 +1,17 @@
+.btn{
+    width: 120px;
+    height: 26px;
+    padding: 10px;
+    background-color: rgb(102, 212, 102);
+    color: white;
+    border-radius: 45px;
+    text-align: center;
+    cursor: pointer;
+}
+.btnBox{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
