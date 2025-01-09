@@ -19,7 +19,7 @@ const PollDtails = () => {
   }, [])
 
   const HandleSubmit = () => {
-    if (!optionIndex) {
+    if (optionIndex===undefined) {
       toast.error("Please select an option", { position: 'top-center' })
       return
     }
