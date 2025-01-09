@@ -57,6 +57,15 @@ button{
     all: unset;
     font-size: 20px;
 }
+.add{
+    width: 150px;
+    font-size: 25px;
+    border-radius: 20px;
+    padding: 5px;
+    text-align: center;
+    border: 2px solid black;
+    margin: 0 auto;
+}
 
 @media (max-width: 500px) {
     h1{

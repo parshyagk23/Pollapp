@@ -4,8 +4,13 @@ const PollSchema= require('../Model/Pollmodel')
 const CratePoll =async (req,res)=>{
 
     try {
-        const { title, description, option1, option2 } = req.body;
-    if (!title || !description || !option1 ||!option2) {
+        const { title, description, option } = req.body;
+        let OptionError =false 
+        option?.map((val)=>{
+          if(!val) !OptionError
+        })
+    if (!title || !description || OptionError ) {
+
       return res.status(400).json({
         errormessage: "Bad request",
       });
@@ -13,8 +18,7 @@ const CratePoll =async (req,res)=>{
     const poll = await new PollSchema({
         title,
         description,
-        option1,
-        option2
+        option,
     })
     await poll.save()
     res.status(200).json({

@@ -10,12 +10,8 @@ const pollSchema = mongoose.Schema(
             type: String,
             required: true
         },
-        option1: {
-            type: String,
-            required: true
-        },
-        option2: {
-            type: String,
+        option: {
+            type: Array,
             required: true
             
         },

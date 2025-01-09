@@ -6,17 +6,17 @@ import Cookies from "js-cookie";
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../Api/Auth';
 const CreatePoll = () => {
-    const [PollDate, setPollData] = useState({
+    const [PollData, setPollData] = useState({
         title: "",
         description: "",
-        option1: "",
-        option2: ""
+        option: ["", ""],
+
+        
     })
     const [error, setError] = useState({
         title: "",
         description: "",
-        option1: "",
-        option2: "",
+        option: []
 
     })
     const navigate = useNavigate()
@@ -35,7 +35,17 @@ const CreatePoll = () => {
 
     const HandleChange = (e) => {
         setPollData({
-            ...PollDate, [e.target.name]: e.target.value
+            ...PollData, [e.target.name]: e.target.value
+        })
+        
+    }
+    const HandleOptionChange = (e) => {
+        const Newoptions = PollData.option;
+       
+        Newoptions[e.target.name]= e.target.value
+        setPollData({
+            ...PollData, option:Newoptions
+
         })
         
     }
@@ -45,27 +55,28 @@ const CreatePoll = () => {
         let newError = {
             title: "",
             description: "",
-            option1: "",
-            option2: "",
+            option: ["",""],
             };
-        if (!PollDate.title) {
+        if (!PollData.title) {
 
             newError.title = 'title is required'
         }
 
-        if (!PollDate.description) {
+        if (!PollData.description) {
             newError.description = 'description is required'
         }
-        if (!PollDate.option1) {
-            newError.option1 = 'option1 is required'
-
+        let OptionError = false
+        PollData?.option?.map((item,index)=>{
+            if(!item){
+                if(index===0){newError.option[index]='option is required'}
+                else if(index===1) {newError.option[index]='option is required'}
+                else{newError?.option.push( 'option is required'); }
+            OptionError=true
         }
-        if (!PollDate.option2) {
-            newError.option2 = 'option2 is required'
-
-        }
+        })
+        
         setError(newError)
-        if (!PollDate.title || !PollDate.description || !PollDate.option1 || !PollDate.option2) {
+        if (!PollData.title || !PollData.description ||OptionError) {
             isError = true;
         }
         return isError
@@ -76,7 +87,7 @@ const CreatePoll = () => {
         if (isError) {
             return;
         }
-        const responce = await CreatePollData(PollDate)
+        const responce = await CreatePollData(PollData)
         if (responce) {
             toast.success(responce.successMessage, { position: 'top-center' })
             
@@ -87,8 +98,21 @@ const CreatePoll = () => {
         setPollData({
             title: "",
             description: "",
-            option1: "",
-            option2: ""
+            option: []
+        })
+    }
+    const HandleAddOption = ()=>{
+        const newOption = PollData.option
+        newOption.push("")   
+        setPollData({
+            ...PollData, option: newOption
+        })
+    }
+    const HandleRemoveOption = ()=>{
+        const newOption = PollData.option
+        newOption.pop("")   
+        setPollData({
+            ...PollData, option: newOption
         })
     }
     return (
@@ -100,7 +124,7 @@ const CreatePoll = () => {
                 <div className={styles.Form} >
                     <label htmlFor="">Poll Title</label>
                     <div>
-                        <input type="text" name='title' value={PollDate.title} onChange={(e) => HandleChange(e)} required />
+                        <input type="text" name='title' value={PollData.title} onChange={(e) => HandleChange(e)} required />
                         <p style={{ color: 'red' }} >{error.title}</p>
 
                     </div>
@@ -108,24 +132,36 @@ const CreatePoll = () => {
                 <div className={styles.Form} >
                     <label htmlFor="">Description</label>
                     <div>
-                        <textarea type="text" name="description" value={PollDate.description} style={{ height: "100px" }} onChange={(e) => HandleChange(e)} required />
+                        <textarea type="text" name="description" value={PollData.description} style={{ height: "100px" }} onChange={(e) => HandleChange(e)} required />
                         <p style={{ color: 'red' }} >{error.description}</p>
                     </div>
                 </div>
-                <div className={styles.Form} >
-                    <label htmlFor="">Option1</label>
+                {PollData?.option.map((item,index)=>
+                (
+                    <div key={index} className={styles.Form} >
+                    <label htmlFor="">Option{index+1}</label>
                     <div>
-                        <input type="text" name='option1' value={PollDate.option1} onChange={(e) => HandleChange(e)} required />
-                        <p style={{ color: 'red' }} >{error.option1}</p>
+                        <input type="text" name={index} value={item} onChange={(e) =>HandleOptionChange(e)} required />
+                        <p style={{ color: 'red' }} >{error.option[index]}</p>
                     </div>
                 </div>
-                <div className={styles.Form} >
-                    <label htmlFor="">Option2</label>
-                    <div>
-                        <input type="text" name='option2' value={PollDate.option2} onChange={(e) => HandleChange(e)} required />
-                        <p style={{ color: 'red' }} >{error.option2}</p>
-                    </div>
+                )
+                    
+                )}
+                <div style={{display:'flex', gap:'10px'}} >
+                {PollData.option.length<6 &&
+                <div className={styles.add}  onClick={HandleAddOption}>
+                <button>
+                    Add Option +
+                </button>
+            </div>}
+                {PollData.option.length>2 && <div className={styles.add} onClick={HandleRemoveOption} >
+                    <button>
+                        Remove Option -
+                    </button>
+                </div>}
                 </div>
+               
             </section>
             <div className={styles.btn} onClick={CreatePollhandle} >
                 <button>Create Poll</button>
