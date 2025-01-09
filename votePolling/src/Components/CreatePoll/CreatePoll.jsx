@@ -148,7 +148,7 @@ const CreatePoll = () => {
                 )
                     
                 )}
-                <div style={{display:'flex', gap:'10px'}} >
+                <div style={{ width:'330px', margin:'0 auto', display:'flex', gap:'10px'}} >
                 {PollData.option.length<6 &&
                 <div className={styles.add}  onClick={HandleAddOption}>
                 <button>
